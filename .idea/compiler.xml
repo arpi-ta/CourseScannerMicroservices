@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="eureka-server" />
+        <module name="CourseScanner-Auth" />
+        <module name="courseScanner-catalog" />
+        <module name="CourseScanner-Search" />
+        <module name="CourseScanner-zuul" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="CourseScanner-Auth" target="11" />
+      <module name="courseScanner-catalog" target="11" />
+      <module name="CourseScanner-Search" target="11" />
+      <module name="CourseScanner-zuul" target="11" />
+      <module name="CourseScannerRef" target="11" />
+      <module name="eureka-server" target="11" />
+    </bytecodeTargetLevel>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="CourseScanner-Auth" options="-parameters" />
+      <module name="CourseScanner-Search" options="-parameters" />
+      <module name="CourseScanner-zuul" options="-parameters" />
+      <module name="CourseScannerRef" options="-parameters" />
+      <module name="courseScanner-catalog" options="-parameters" />
+      <module name="eureka-server" options="-parameters" />
+    </option>
+  </component>
+</project>
