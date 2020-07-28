@@ -41,6 +41,21 @@ public class SearchController {
 
         return favorites;
     }
+    @RequestMapping("/{id}/{category}")
+    public Favorites getTopRatedCourses(@PathVariable final int id,@PathVariable String category) {
+        LOGGER.info("Displaying Top rated college ... ");
+
+        String sort=category;
+        Favorites favourites=new Favorites();
+        favourites.setId(id);
+
+        // get list of available colleges
+        // @SuppressWarnings("unchecked")    // we'll throw an exception from image service to simulate a failure
+        List<Object> courses = restTemplate.getForObject("http://course-catalog-service/api/"+sort, List.class);
+        favourites.setTopics(courses);
+
+        return favourites;
+    }
 
 
 }
