@@ -4,7 +4,7 @@ import java.util.List;
 
 public class Favorites {
     private int id;
-    private List<Object> topics;
+    private List<Topics> topics;
 
     public Favorites() {
     }
@@ -21,11 +21,11 @@ public class Favorites {
         this.id = id;
     }
 
-    public List<Object> getTopics() {
+    public List<Topics> getTopics() {
         return topics;
     }
 
-    public void setTopics(List<Object> topics) {
+    public void setTopics(List<Topics> topics) {
         this.topics = topics;
     }
 }

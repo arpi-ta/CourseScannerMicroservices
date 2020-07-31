@@ -34,10 +34,10 @@ public class TopicController {
     public ResponseEntity<Object> addTopics(@RequestBody  Topics topic){
 
 
-           Topics  t=topicService.addTopics(topic);
+           Topics  t=topicService.addTopics(topic); //adding topic to database
 
         URI location=ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
-                .buildAndExpand(t.getId()).toUri();
+                .buildAndExpand(t.getId()).toUri(); //Response Entity to return appropiate  message
 
         return ResponseEntity.created(location).build();
 
