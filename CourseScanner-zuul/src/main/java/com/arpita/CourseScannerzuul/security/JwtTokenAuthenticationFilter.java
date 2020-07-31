@@ -41,10 +41,8 @@ public class JwtTokenAuthenticationFilter extends  OncePerRequestFilter {
         }
 
         // If there is no token provided and hence the user won't be authenticated.
-        // It's Ok. Maybe the user accessing a public path or asking for a token.
-
         // All secured paths that needs a token are already defined and secured in config class.
-        // And If user tried to access without access token, then he won't be authenticated and an exception will be thrown.
+        //  without access token,won't be authenticated and an exception will be thrown.
 
         // 3. Get the token
         String token = header.replace(jwtConfig.getPrefix(), "");
@@ -59,7 +57,7 @@ public class JwtTokenAuthenticationFilter extends  OncePerRequestFilter {
 
             String username = claims.getSubject();
             if(username != null) {
-                @SuppressWarnings("unchecked")
+
                 List<String> authorities = (List<String>) claims.get("authorities");
 
                 // 5. Create auth object
@@ -74,11 +72,9 @@ public class JwtTokenAuthenticationFilter extends  OncePerRequestFilter {
             }
 
         } catch (Exception e) {
-            // In case of failure. Make sure it's clear; so guarantee user won't be authenticated
+           // user won't be authenticated
             SecurityContextHolder.clearContext();
         }
-
-        // go to the next filter in the filter chain
         chain.doFilter(request, response);
     }
 

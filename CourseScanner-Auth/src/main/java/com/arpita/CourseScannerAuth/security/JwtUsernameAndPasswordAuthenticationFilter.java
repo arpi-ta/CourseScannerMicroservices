@@ -46,7 +46,7 @@ public class JwtUsernameAndPasswordAuthenticationFilter extends UsernamePassword
 
         try {
 
-            // 1. Get credentials from request
+            // 1. Get credentials from request username and password
             UserCredentials creds = new ObjectMapper().readValue(request.getInputStream(), UserCredentials.class);
 
             // 2. Create auth object (contains credentials) which will be used by auth manager

@@ -1,15 +1,13 @@
 package com.microservices.courseScannercatalog.Controller;
 
+import com.microservices.courseScannercatalog.Repository.TopicRepo;
 import com.microservices.courseScannercatalog.Services.TopicService;
 import com.microservices.courseScannercatalog.model.Topics;
 import org.hibernate.cfg.Environment;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
@@ -23,6 +21,9 @@ public class TopicController {
     @Autowired
     private TopicService topicService;
 
+    @Autowired
+    private TopicRepo topicRepo;
+
     @RequestMapping("/courses")
     public List<Topics> getAllTopics(){
 
@@ -33,13 +34,18 @@ public class TopicController {
     public ResponseEntity<Object> addTopics(@RequestBody  Topics topic){
 
 
-           Topics  t=topicService.addTopics(topic);
+           Topics  t=topicService.addTopics(topic); //adding topic to database
 
         URI location=ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
-                .buildAndExpand(t.getId()).toUri();
+                .buildAndExpand(t.getId()).toUri(); //Response Entity to return appropiate  message
 
         return ResponseEntity.created(location).build();
 
+    }
+
+    @GetMapping("/{category}")
+    public List<Topics> findByCategory(@PathVariable String category) {
+        return topicRepo.findByCourseCategoryLimit3(category);
     }
 
 }

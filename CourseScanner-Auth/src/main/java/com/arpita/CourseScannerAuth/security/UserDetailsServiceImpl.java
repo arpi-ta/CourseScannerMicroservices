@@ -28,14 +28,18 @@ public class UserDetailsServiceImpl implements UserDetailsService {
                 new AppUser(2, "admin", encoder.encode("12345"), "ADMIN")
         );
 
-
-        for (AppUser appUser : users) {
+        //to check whether the user is present or not if present return grantedAuthorities and other details
+        //Auth Manager validate the instance and use thsi method to load the user
+        for (AppUser appUser : users)
+        {
             if (appUser.getUsername().equals(username)) {
 
-                // Remember that Spring needs roles to be in this format: "ROLE_" + userRole (i.e. "ROLE_ADMIN")
-                // So, we need to set it to that format, so we can verify and compare roles (i.e. hasRole("ADMIN")).
+                // roles needs to be in this format: "ROLE_" + userRole (i.e. "ROLE_ADMIN")
+                // to verify and compare roles (i.e. hasRole("ADMIN")).
+                //Represents an authority granted to an Authentication object.
+                //Creates a array of GrantedAuthority objects from a comma-separated string representation
                 List<GrantedAuthority> grantedAuthorities = AuthorityUtils
-                        .commaSeparatedStringToAuthorityList("ROLE_" + appUser.getRole());
+                        .commaSeparatedStringToAuthorityList("ROLE_" + appUser.getRole()); //taking out the role
 
                 // The "User" class is provided by Spring and represents a model class for user to be returned by UserDetailsService
                 // And used by auth manager to verify and check user authentication.
